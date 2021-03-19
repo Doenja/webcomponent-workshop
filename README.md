@@ -1,6 +1,8 @@
 # Webcomponent Workshop
 
 In this project you will learn how to create webcomponents in vanilla javascript. The webcomponent that you will create is a simple <lib-square> custom element that can receive the attributes size and image and adjust itself accordingly. 
+  
+You can follow this workshop by cloning the repo and following the steps in this readme. You can make your changes in the lib-square and the index.html file.
 
 ### Step 1 - Create a class that will define your webcomponent
 ```
