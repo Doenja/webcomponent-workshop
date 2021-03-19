@@ -20,7 +20,6 @@
         }
     }
 
-
 // Step 5 - Create a div element called wrapper and add it to the shadowdom. Add the attribute class="wrapper"
     ...
     constructor() {
