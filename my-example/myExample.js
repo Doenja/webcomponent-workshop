@@ -1,6 +1,7 @@
 class myExample extends HTMLElement {
     constructor() {
         super()
+        this.attachShadow({ mode: 'open' })
     }
 
     connectedCallback() {
@@ -14,7 +15,7 @@ class myExample extends HTMLElement {
             wrapper.style.backgroundColor = this.getAttribute('color')
         }
 
-        this.appendChild(wrapper)
+        this.shadowRoot.appendChild(wrapper)
     }
 
 }

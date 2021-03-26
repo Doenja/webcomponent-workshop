@@ -1,6 +1,8 @@
 # Webcomponent Workshop
 
-In this project you will learn how to create webcomponents in vanilla javascript. The webcomponent that you will create is a simple <my-square> custom element that can receive the attributes size and image and adjust itself accordingly.
+In this project you will learn how to create webcomponents in vanilla javascript. The webcomponent that you will create is a simple custom element that can receive the attributes and adjust itself accordingly.
+
+## Creating a webcomponent
 
 1. Create a class that will define your webcomponent
 
@@ -98,4 +100,27 @@ class MyComponent extends HTMLElement {
     this.appendChild(example)
   }
 }
+```
+
+## Attaching the shadow dom
+
+Your webcomponent now lives in the dom. This means that your webcomponent can be influenced, for example, by global css files. In order to avoid this webcomponents can create their own dom, a shadow dom. This shadow dom hides and separates the custom components code from the rest of the page.
+
+1. In your constructor, attach a shadow dom
+
+```
+class MyComponent extends HTMLElement {
+  constructor() {
+      super()
+      this.attachShadowDom({ mode: 'open' })
+  }
+
+  ...
+}
+```
+
+2. If you look in your browser the children of your component are not rendering anymore. When you inspect your element you can see that a shadowroot is added to your component. The children do not render anymore because they were appended to the component. Attach them to the shadowRoot instead.
+
+```
+  this.shadowRoot.appendChild(example)
 ```
