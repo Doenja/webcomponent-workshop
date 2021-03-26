@@ -1,8 +1,9 @@
 # Webcomponent Workshop
 
-In this project you will learn how to create webcomponents in vanilla javascript. The webcomponent that you will create is a simple <lib-square> custom element that can receive the attributes size and image and adjust itself accordingly. 
+In this project you will learn how to create webcomponents in vanilla javascript. The webcomponent that you will create is a simple <my-square> custom element that can receive the attributes size and image and adjust itself accordingly.
 
 ### Step 1 - Create a class that will define your webcomponent
+
 ```
 class MyComponent extends HTMLElement {
   connectedCallback() {
@@ -10,87 +11,93 @@ class MyComponent extends HTMLElement {
   }
 }
 ```
+
 ### Step 2 - Register your new custom element, after your class, using the CustomElementRegistry.define() method
+
 ```
 ...
 customElements.define('my-component', MyComponent);
 ```
 
 ### Step 3 - Add your new webcomponent in your html file
+
 ```
 <my-component></my-component>
 ```
 
-### Step 4 - Add a constructor in your class and add a shadowdom, using Element.attachShadow() method
+### Step 4 - Add a constructor in your class and call the super method.
+
 ```
 class MyComponent extends HTMLElement {
   constructor() {
       super()
-      const shadow = this.attachShadow({mode: 'open'})
   }
 }
 ```
 
-### Step 5 - Create a div element called wrapper and add it to the shadowdom. Add the attribute class="wrapper"
-```
-...
-constructor() {
-    ...
-    const wrapper = document.createElement('div');
-    wrapper.setAttribute('class','wrapper');
-}
-```
+### Step 5 - Now we have a custom component in our dom, you can see it when you inspect it. However, your component is not doing anything yet. You want your component to make some changes to the dom after it is connected to the dom. When the component is 'connected' to the dom the connectedCallback is fired. In your component you can make changes after this connecion is done by adding a connectedCallback() function to your class.
 
-### Step 6 - Add styles to the wrapper and attach it to the shadow dom so that you can see it.
+### Add a connectedCallback() function and create and append a div to your component.
+
 ```
-...
+class MyComponent extends HTMLElement {
   constructor() {
-      ...
-
-      wrapper.style.backgroundColor = "indianred"
-      wrapper.style.width = "100px"
-      wrapper.style.height = "100px"
-
-      this.shadowRoot.append(wrapper)
+      super()
   }
-```
 
-### Step 7 - Create a link element, set it to relation stylesheet and href to the stylesheet
-```
-...
-constructor() {
-    ...
-
-    const linkElem = document.createElement('link');
-    linkElem.setAttribute('rel', 'stylesheet');
-    linkElem.setAttribute('href', 'lib-example/styles.css');
-    shadow.appendChild(linkElem);
+  connectedCallback() {
+    const example = document.createElement('div')
+    this.appendChild(example)
+  }
 }
 ```
 
-### Step 8 - In your html, set a size attribute
-```
-<lib-example size="300px"></lib-example>
-```
+### Step 6 - To make your div visible give it some style before you append it.
 
-### Step 9 - In your constructor, if the color attribute is set use it as the background color
 ```
-if(this.hasAttribute('size')) {
-    wrapper.style.width = this.getAttribute('size')
-    wrapper.style.height = this.getAttribute('size')
+class MyComponent extends HTMLElement {
+  constructor() {
+      super()
+  }
+
+  connectedCallback() {
+    const example = document.createElement('div')
+
+    example.style.backgroundColor = "blue"
+    example.style.width = "100px"
+    example.style.height = "100px"
+
+    this.appendChild(example)
+  }
 }
 ```
 
-### Step 10 - In your html, add another of your components and set the an img tag
+### Step 7 - You can make your webcomponent respond to html properties. Give your component an html property.
+
 ```
-<lib-example size="300px" img="img/colors.jpeg"></lib-example>
+<my-component color="red"></my-component>
 ```
 
-### Step 11 - If an image attribute is set, create an image with that src and append it to the wrapper
+### Step 8 - You can check for attributes with the hasAttribute method and you can get attribute values with the getAttribute method. Add an if statement that changes the component when the property is set.
+
 ```
-if(this.hasAttribute('img')) {
-    const img = document.createElement('img')
-    img.src = this.hasAttribute('img') ? this.getAttribute('img') : 'img/colors.jpeg'
-    wrapper.appendChild(img)
+class MyComponent extends HTMLElement {
+  constructor() {
+      super()
+  }
+
+  connectedCallback() {
+    const example = document.createElement('div')
+
+    example.style.backgroundColor = "blue"
+    example.style.width = "100px"
+    example.style.height = "100px"
+
+    if(this.hasAttribute('color')) {
+        wrapper.style.backgroundColor = this.getAttribute('color')
+    }
+
+    this.appendChild(example)
+  }
 }
 ```
