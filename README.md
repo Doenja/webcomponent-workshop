@@ -104,7 +104,7 @@ class MyComponent extends HTMLElement {
 
 ## Attaching the shadow dom
 
-Your webcomponent now lives in the dom. This means that your webcomponent can be influenced, for example, by global css files. In order to avoid this webcomponents can create their own dom, a shadow dom. This shadow dom hides and separates the custom components code from the rest of the page.
+Your webcomponent now lives in the dom. This means that your webcomponent can be influenced, for example, by global css files. In order to avoid this webcomponents can create their own dom, a shadow dom. This shadow dom hides and separates the custom components code from the rest of the page. It can also be queried and manipulated like a normal dom from inside your component.
 
 1. In your constructor, attach a shadow dom
 
@@ -123,4 +123,56 @@ class MyComponent extends HTMLElement {
 
 ```
   this.shadowRoot.appendChild(example)
+```
+
+## Using HTML templates
+
+Instead of appending the children to your component you can also use an html template. This html template makes use of the property innerHtml, which can be used to get or set the html markup within an element.
+
+1. In your constructor add some inner html to your shadowRoot. Now you can remove the appendChild from your connected callback and select your innerHTML via querySelectors.
+
+```
+class myExample extends HTMLElement {
+    constructor() {
+        ...
+        this.shadowRoot.innerHTML = `
+            <div id="example"></div>
+        `
+    }
+
+    connectedCallback() {
+        const example = this.shadowRoot.querySelector('#example')
+
+        ...
+
+        ~~this.shadowRoot.appendChild(example)~~
+    }
+
+}
+```
+
+The html templates also allow you to add text between your custom tags and display them in your custom component. For this you use a slot. You can also render other html or even other webcomponents in your custom component.
+
+2. Add some html in between your custom html tags
+
+```
+<my-component color="red">
+  <span>Hello world!</span>
+</my-component>
+```
+
+3. Add a slot in your html template to display the content between your custom brackets
+
+```
+  this.shadowRoot.innerHTML = `
+      <div id="example">
+        <slot></slot>
+      </div>
+  `
+```
+
+4. You can also add a default value to your slot
+
+```
+  <slot>default value</slot>
 ```
