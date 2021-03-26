@@ -35,9 +35,7 @@ class MyComponent extends HTMLElement {
 }
 ```
 
-5. Now we have a custom component in our dom, you can see it when you inspect it. However, your component is not doing anything yet. You want your component to make some changes to the dom after it is connected to the dom. When the component is 'connected' to the dom the connectedCallback is fired. In your component you can make changes after this connecion is done by adding a connectedCallback() function to your class.
-
-### Add a connectedCallback() function and create and append a div to your component.
+5. Now we have a custom component in our dom, you can see it when you inspect it. However, your component is not doing anything yet. You want your component to make some changes to the dom after it is connected to the dom. When the component is 'connected' to the dom the connectedCallback is fired. In your component you can make changes after this connecion is done by adding a connectedCallback() function to your class. Add a connectedCallback() function and create and append a div to your component.
 
 ```
 class MyComponent extends HTMLElement {
