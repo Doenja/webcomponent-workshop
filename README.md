@@ -4,30 +4,30 @@ In this project you will learn how to create webcomponents in vanilla javascript
 
 ## Creating a webcomponent
 
-1. Create a class that will define your webcomponent
+1. Create a class that will define your webcomponent.
 
 ```
 class MyComponent extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `<h1>Hello world</h1>`;
-  }
+
 }
 ```
 
-2. Register your new custom element, after your class, using the CustomElementRegistry.define() method
+2. Register your new custom element, after your class, using the CustomElementRegistry.define() method. The first argument will be the name of your custom tag, the second argument should be your class name.
+
+> The name of your tag has to contain at least one dash. This is to avoid you from creating custom tags with the same name as other existing tags.
 
 ```
 ...
 customElements.define('my-component', MyComponent);
 ```
 
-3. Add your new webcomponent in your html file
+3. Add your new webcomponent in your html file.
 
 ```
 <my-component></my-component>
 ```
 
-4. Add a constructor in your class and call the super method.
+4. Add a constructor in your class and call the super method. The constructor is used for basic initialization of your component.
 
 ```
 class MyComponent extends HTMLElement {
