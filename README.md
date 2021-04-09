@@ -145,7 +145,6 @@ class myExample extends HTMLElement {
 
         ...
 
-        ~~this.shadowRoot.appendChild(example)~~
     }
 
 }
