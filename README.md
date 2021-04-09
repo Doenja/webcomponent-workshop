@@ -94,7 +94,7 @@ class MyComponent extends HTMLElement {
     example.style.height = "100px"
 
     if(this.hasAttribute('color')) {
-        wrapper.style.backgroundColor = this.getAttribute('color')
+        example.style.backgroundColor = this.getAttribute('color')
     }
 
     this.appendChild(example)
@@ -112,7 +112,7 @@ Your webcomponent now lives in the dom. This means that your webcomponent can be
 class MyComponent extends HTMLElement {
   constructor() {
       super()
-      this.attachShadowDom({ mode: 'open' })
+      this.attachShadow({ mode: 'open' })
   }
 
   ...
